@@ -61,6 +61,9 @@ function DataConverter(nodeId) {
     this.includeWhiteSpace = true;
     this.useTabsForIndent = false;
 
+    // avoid double keypress during copy and paste
+    this.keys = {};
+
 }
 
 //---------------------------------------
@@ -69,7 +72,6 @@ function DataConverter(nodeId) {
 
 DataConverter.prototype.create = function (w, h) {
     var self = this;
-
     //build HTML for converter
     this.inputHeader = $(
             '<div class="groupHeader" id="inputHeader"><p class="groupHeadline">Input CSV or tab-delimited data. <span class="subhead"> Using Excel? Simply copy and paste. No data on hand? <a href="#" id="insertSample">Use sample</a></span></p></div>');
@@ -113,9 +115,21 @@ DataConverter.prototype.create = function (w, h) {
         self.convert();
     });
 
-    $("#dataInput").keyup(function () {
-        console.log('Event: KeyUp');
-        self.convert();
+    $('#textareaID').bind('input propertychange', function () {
+        console.log("INPUT");
+    });
+
+
+    // added to remove double trigger of keyup during copy paste
+    $("#dataInput").keydown(function (e) {
+        self.keys[e.which] = true;
+    });
+
+    $("#dataInput").keyup(function (e) {
+        if (self.keys[e.which]) {
+            self.convert();
+            self.keys = {};
+        }
     });
     $("#dataInput").change(function () {
         self.convert();
