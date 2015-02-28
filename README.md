@@ -5,3 +5,5 @@ View it in action here: http://shancarter.github.com/mr-data-converter/
 
 ###This fork:
 Added a project driven converter for translations from excel to javascript object 
+
+            {"text": "Javascript - Translation", "id": "javascriptTranslationObject", "notes": ""},
