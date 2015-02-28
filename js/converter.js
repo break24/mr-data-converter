@@ -24,6 +24,7 @@ function DataConverter(nodeId) {
         {"text": "JSON - Column Arrays", "id": "jsonArrayCols", "notes": ""},
         {"text": "JSON - Row Arrays", "id": "jsonArrayRows", "notes": ""},
         {"text": "JSON - Dictionary", "id": "jsonDict", "notes": ""},
+        {"text": "JSON - Translation", "id": "jsonTranslation", "notes": ""},
         {"text": "MySQL", "id": "mysql", "notes": ""},
         {"text": "PHP", "id": "php", "notes": ""},
         {"text": "Python - Dict", "id": "python", "notes": ""},
@@ -114,6 +115,7 @@ DataConverter.prototype.create = function (w, h) {
     });
 
     $("#dataInput").keyup(function () {
+        console.log('Event: KeyUp');
         self.convert();
     });
     $("#dataInput").change(function () {
@@ -167,8 +169,6 @@ DataConverter.prototype.convert = function () {
         var errors = parseOutput.errors;
 
         this.outputText = DataGridRenderer[this.outputDataType](dataGrid, headerNames, headerTypes, this.indent, this.newLine);
-
-
         this.outputTextArea.val(errors + this.outputText);
 
     }
