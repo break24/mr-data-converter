@@ -269,6 +269,57 @@ var DataGridRenderer = {
         return outputText;
     },
     //---------------------------------------
+    // JSON Dictionary
+    //---------------------------------------
+    javascriptTranslationObject: function (dataGrid, headerNames, headerTypes, indent, newLine) {
+        //inits...
+        var commentLine = "//";
+        var commentLineEnd = "";
+        var outputText = "";
+        var numRows = dataGrid.length;
+        var numColumns = headerNames.length;
+
+        // TODO only one Group/Level is supported -> column 0 => group, column 1 =>key
+
+        var i = 0;
+        while (headerNames[i].toLowerCase() !== 'key' && i < numColumns) {
+            i++;
+        }
+        var keyColumn = i;
+
+        for (var languageColumn = (keyColumn + 1); languageColumn < numColumns; languageColumn++) {
+            // take first translation column
+            outputText += "'" + headerNames[languageColumn] + "':{" + newLine;
+            var groupName = null;
+
+            for (var i = 0; i < numRows; i++) {
+
+                // TODO only one Group/Level is supported
+                // for (var groupColumn = 0; groupColumn < keyColumn; groupColumn++) {
+                if (groupName !== dataGrid[i][keyColumn - 1]) {
+                    if (groupName) {
+                        // remove new line and ,
+                        outputText = outputText.substring(0, outputText.length - 2);
+                        // close former group
+                        outputText += newLine + "}," + newLine;
+                    }
+                    groupName = dataGrid[i][keyColumn - 1];
+                    outputText += "'" + groupName + "':{" + newLine;
+                }
+
+                // add key / value
+                outputText += "'" + dataGrid[i][keyColumn] + "': '" + dataGrid[i][languageColumn] + "'," + newLine;
+            }
+            // close last Group in language and language
+            outputText = outputText.substring(0, outputText.length - 2);
+            outputText += newLine + "}" + newLine + "}," + newLine;
+        }
+        outputText = outputText.substring(0, outputText.length - 2);
+
+
+        return outputText;
+    },
+    //---------------------------------------
     // MYSQL
     //---------------------------------------
     mysql: function (dataGrid, headerNames, headerTypes, indent, newLine) {
@@ -563,6 +614,5 @@ var DataGridRenderer = {
 
 
         return outputText;
-
-    },
+    }
 };

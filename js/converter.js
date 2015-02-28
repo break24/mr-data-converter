@@ -24,7 +24,7 @@ function DataConverter(nodeId) {
         {"text": "JSON - Column Arrays", "id": "jsonArrayCols", "notes": ""},
         {"text": "JSON - Row Arrays", "id": "jsonArrayRows", "notes": ""},
         {"text": "JSON - Dictionary", "id": "jsonDict", "notes": ""},
-        {"text": "JSON - Translation", "id": "jsonTranslation", "notes": ""},
+        {"text": "Javascript - Translation", "id": "javascriptTranslationObject", "notes": ""},
         {"text": "MySQL", "id": "mysql", "notes": ""},
         {"text": "PHP", "id": "php", "notes": ""},
         {"text": "Python - Dict", "id": "python", "notes": ""},

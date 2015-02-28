@@ -1,4 +1,3 @@
-var _gaq = _gaq || [];
 
 $(document).ready(function () {
     var widthOffset = 345;
@@ -27,10 +26,6 @@ $(document).ready(function () {
 
 
     function updateSettings(evt) {
-
-        if (evt) {
-            _gaq.push(['_trackEvent', 'Settings', evt.currentTarget.id]);
-        }
 
         d.includeWhiteSpace = $('#includeWhiteSpaceCB').attr('checked');
 
