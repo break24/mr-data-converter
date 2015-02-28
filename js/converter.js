@@ -111,7 +111,6 @@ DataConverter.prototype.create = function (w, h) {
         evt.preventDefault();
         self.insertSampleData();
         self.convert();
-        _gaq.push(['_trackEvent', 'SampleData', 'InsertGeneric']);
     });
 
     $("#dataInput").keyup(function () {
@@ -120,7 +119,6 @@ DataConverter.prototype.create = function (w, h) {
     });
     $("#dataInput").change(function () {
         self.convert();
-        _gaq.push(['_trackEvent', 'DataType', self.outputDataType]);
     });
 
     $("#dataSelector").bind('change', function (evt) {
